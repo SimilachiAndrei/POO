@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <cstring>
+using namespace std;
+//p3
+int main()
+{
+   char *p,str[20];
+   char cuv[10][20];
+   int v[10];
+   gets(str);
+   p=strtok(str," ");
+   int l=0;
+   while(p!=NULL)
+   {
+     strcpy(cuv[l],p);
+     l++;
+     p=strtok(NULL," ");
+   }
+    for(int i=0;i<l-1;i++)
+    {
+        for(int j=i+1;j<l;j++)
+        {
+            if(strlen(cuv[i])<strlen(cuv[j])||strcmp(cuv[i],cuv[j])>0)
+                swap(cuv[i],cuv[j]);
+        }
+    }
+    for(int i=0;i<l;i++)
+        printf("%s \n",cuv[i]);
+}
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <cstring>
+using namespace std;
+int atoi(char num[])
+{
+    int m=1;
+    int n=0;
+    for(int i=strlen(num)-1;i>=0;i--)
+    {
+      n=n+m*(num[i]-'0');
+      m=m*10;
+    }
+    return n;
+}
+//p2
+int main()
+{
+    int s=0;
+    FILE *fptr;
+    if ((fptr = fopen("C:\\file.txt","r")) == NULL)
+    {
+        printf("Error! opening file");
+        exit(1);
+    }
+    char num[20]="";
+    int l=0;
+    int n=0;
+    while(!feof(fptr))
+    {
+        char p;
+        while(!feof(fptr)&&(p=fgetc(fptr))!='/n')
+        {
+            num[l++]=p;
+        }
+        num[l]=NULL;
+        n=atoi(num);
+        cout<<n<<endl;
+        l=0;
+        delete(num);
+    }
+    cout<<s;
+}
