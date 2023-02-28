@@ -3,15 +3,25 @@
 void NumberList::Init()
 {
     this->count = 0;
+    numbers = new int[10];
 }
 bool NumberList::Add(int x)
 {
-    if (count < 10)
+    if (count < size)
     {
         numbers[count++] = x;
         return true;
     }
-    return false;
+    else
+    {
+        int* tmp = new int[count];              
+        memcpy(tmp, numbers , count * sizeof * tmp);       
+        delete[] numbers;                             
+
+        numbers = tmp;                                
+        numbers[count] = x;
+
+    }
 }
 
 void NumberList::Sort()
