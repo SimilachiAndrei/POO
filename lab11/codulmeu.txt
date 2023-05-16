@@ -1,0 +1,39 @@
+#include <iostream>
+#include <list>
+template<typename T>
+void sortare(std::list<T>& List)
+{
+    typename std::list<T>::iterator it1 = List.end();
+    typename std::list<T>::iterator it2;
+    typename std::list<T>::iterator fin = List.begin();
+    --fin;
+    while (it1 != fin)
+    {
+        it1++;
+        it2 = it1;
+        ++it2;
+        while (it2 != List.end())
+        {
+            if (*it2 > *it1)
+            { 
+                it1--;
+                std::iter_swap(it1, it2);
+                it2++;
+                break;
+            }
+            ++it2;
+        }
+        --fin; 
+        ++it1;
+    }
+}
+
+int main() {
+    std::list<int> List{12,45,8,6};
+    sortare(List);
+    for(auto it :List)
+    {
+        std::cout<<it<<" ";
+    }
+    std::cout<<std::endl;
+ }
